@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const roomRoutes = require('./routes/roomRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
+const unitRoutes = require('./routes/unitRoutes');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.get('/api/health', (req, res) => {
 
 app.use('/api/rooms', roomRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/units', unitRoutes);
 
 // 404 handler
 app.use((req, res) => {
