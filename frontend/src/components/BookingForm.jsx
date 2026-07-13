@@ -4,6 +4,7 @@ import ConsumptionSelect from './ConsumptionSelect';
 
 const emptyForm = {
   room_id: '',
+  unit_id: '',   
   booking_date: '',
   start_time: '',
   end_time: '',
@@ -14,6 +15,7 @@ const emptyForm = {
 
 export default function BookingForm({
   rooms,
+  units,       
   consumptionOptions,
   editingBooking,
   onSubmit,
@@ -27,6 +29,7 @@ export default function BookingForm({
     if (editingBooking) {
       setForm({
         room_id: String(editingBooking.room_id),
+        unit_id: String(editingBooking.unit_id),  
         booking_date: editingBooking.booking_date?.slice(0, 10) || '',
         start_time: editingBooking.start_time?.slice(0, 5) || '',
         end_time: editingBooking.end_time?.slice(0, 5) || '',
@@ -50,6 +53,7 @@ export default function BookingForm({
 
     const localErrors = [];
     if (!form.room_id) localErrors.push('Pilih ruangan meeting');
+    if (!form.unit_id) localErrors.push('Pilih unit kerja'); 
     if (!form.booking_date) localErrors.push('Tanggal rapat wajib diisi');
     if (!form.start_time) localErrors.push('Waktu mulai wajib diisi');
     if (!form.end_time) localErrors.push('Waktu selesai wajib diisi');
@@ -73,9 +77,9 @@ export default function BookingForm({
       setErrors(localErrors);
       return;
     }
-
-    const payload = {
+const payload = {
       room_id: Number(form.room_id),
+      unit_id: Number(form.unit_id),  
       booking_date: form.booking_date,
       start_time: form.start_time,
       end_time: form.end_time,
@@ -102,7 +106,7 @@ export default function BookingForm({
 
       <section className="form-section">
         <h2 className="section-title">Informasi Ruang Meeting</h2>
-        <div className="row-2">
+        <div className="row-3">
           <div className="field">
             <label htmlFor="room_id">Pilihan Ruangan Meeting</label>
             <select
@@ -119,6 +123,21 @@ export default function BookingForm({
             </select>
           </div>
           <div className="field">
+            <label htmlFor="unit_id">Unit Kerja</label>
+            <select
+              id="unit_id"
+              value={form.unit_id}
+              onChange={(e) => updateField('unit_id', e.target.value)}
+            >
+              <option value="">Pilih Unit Kerja</option>
+              {units.map((unit) => (
+                <option key={unit.id} value={unit.id}>
+                  {unit.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="field">
             <label htmlFor="capacity">Kapasitas Ruangan</label>
             <input id="capacity" type="text" value={selectedRoom ? `${selectedRoom.capacity} Orang` : ''} readOnly placeholder="Kapasitas Ruangan" />
           </div>
@@ -127,7 +146,6 @@ export default function BookingForm({
           <CapacityMeter capacity={selectedRoom.capacity} participantCount={form.participant_count} />
         )}
       </section>
-
       <div className="section-divider" />
 
       <section className="form-section">
