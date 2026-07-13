@@ -9,6 +9,8 @@ const client = axios.create({
 
 export const getRooms = () => client.get('/rooms').then((res) => res.data.data);
 
+export const getUnits = () => client.get('/units').then((res) => res.data.data);
+
 export const getConsumptionOptions = () =>
   client.get('/bookings/consumption-options').then((res) => res.data.data);
 

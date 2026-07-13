@@ -213,6 +213,20 @@ body {
 .navbar-chevron {
   color: rgba(255, 255, 255, 0.6);
 }
+.navbar-logo-img {
+  height: 32px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.navbar-avatar-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
 
 @media (max-width: 720px) {
   .navbar-search { display: none; }

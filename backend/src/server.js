@@ -24,6 +24,14 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Route tidak ditemukan' });
 });
 
+// Global error handler — WAJIB ada di paling bawah, setelah semua route
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.status || 500).json({
+    message: err.message || 'Terjadi kesalahan pada server',
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server berjalan di http://localhost:${PORT}`);

@@ -1,12 +1,12 @@
-import { Bell, ChevronDown, Search, CalendarDays } from 'lucide-react';
+import { Bell, ChevronDown, Search } from 'lucide-react';
+import logo from '../assets/logo.png';
+import profilePic from '../assets/profile.png';
 
 export default function Navbar() {
   return (
     <header className="navbar">
       <div className="navbar-brand">
-        <span className="navbar-logo-mark">
-          <CalendarDays size={18} />
-        </span>
+        <img src={logo} alt="iMeeting Logo" className="navbar-logo-img" />
         <span className="navbar-logo">iMeeting</span>
       </div>
 
@@ -22,7 +22,7 @@ export default function Navbar() {
         </button>
         <div className="navbar-divider" />
         <button className="navbar-user">
-          <span className="navbar-avatar">JD</span>
+          <img src={profilePic} alt="John Doe" className="navbar-avatar-img" />
           <span className="navbar-user-info">
             <span className="navbar-username">John Doe</span>
             <span className="navbar-userrole">Admin</span>

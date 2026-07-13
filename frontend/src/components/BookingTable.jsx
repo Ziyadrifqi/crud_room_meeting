@@ -33,24 +33,29 @@ export default function BookingTable({ bookings, onEdit, onDelete, deletingId })
       <div className="table-wrap">
         <table>
           <thead>
-  <tr>
-    <th>Ruang Meeting</th>
-    <th>Unit Kerja</th>   {/* BARU */}
-    <th>Kapasitas</th>
-    <th>Tanggal Rapat</th>
-    <th>Waktu</th>
-    <th>Jumlah Peserta</th>
-    <th>Jenis Konsumsi</th>
-    <th>Nominal</th>
-    <th></th>
-  </tr>
-</thead>
-<tbody>
-  {pageRows.map((booking) => (
-    <tr key={booking.id}>
-      <td className="cell-strong">{booking.room_name}</td>
-      <td>{booking.unit_name}</td>  
-      <td>{booking.room_capacity} Orang</td>
+            <tr>
+              <th>Ruang Meeting</th>
+              <th>Unit Kerja</th>
+              <th>Kapasitas</th>
+              <th>Tanggal Rapat</th>
+              <th>Waktu</th>
+              <th>Jumlah Peserta</th>
+              <th>Jenis Konsumsi</th>
+              <th>Nominal</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pageRows.map((booking) => (
+              <tr key={booking.id}>
+                <td className="cell-strong">{booking.room_name}</td>
+                <td>{booking.unit_name}</td>
+                <td>{booking.room_capacity} Orang</td>
+                <td>{formatDate(booking.booking_date)}</td>
+                <td>
+                  {formatTime(booking.start_time)} s/d {formatTime(booking.end_time)}
+                </td>
+                <td>{booking.participant_count} Orang</td>
                 <td>
                   {booking.consumption_type.map((item) => (
                     <span key={item} className="tag">

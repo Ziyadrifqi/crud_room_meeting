@@ -1,6 +1,10 @@
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import PageHeader from '../components/PageHeader';
+import BookingForm from '../components/BookingForm';
 import {
   getRooms,
-  getUnits,          
+  getUnits,
   getConsumptionOptions,
   getBooking,
   createBooking,
@@ -13,7 +17,7 @@ export default function BookingFormPage() {
   const isEditing = Boolean(id);
 
   const [rooms, setRooms] = useState([]);
-  const [units, setUnits] = useState([]); 
+  const [units, setUnits] = useState([]);
   const [consumptionOptions, setConsumptionOptions] = useState([]);
   const [editingBooking, setEditingBooking] = useState(null);
   const [submitting, setSubmitting] = useState(false);
@@ -24,11 +28,11 @@ export default function BookingFormPage() {
       try {
         const [roomsData, unitsData, optionsData] = await Promise.all([
           getRooms(),
-          getUnits(),          
+          getUnits(),
           getConsumptionOptions(),
         ]);
         setRooms(roomsData);
-        setUnits(unitsData);   // BARU
+        setUnits(unitsData);
         setConsumptionOptions(optionsData);
 
         if (isEditing) {
@@ -62,7 +66,7 @@ export default function BookingFormPage() {
     }
   };
 
-   return (
+  return (
     <div>
       <PageHeader
         title="Pesan Ruangan"
@@ -73,7 +77,7 @@ export default function BookingFormPage() {
 
       <BookingForm
         rooms={rooms}
-        units={units}   
+        units={units}
         consumptionOptions={consumptionOptions}
         editingBooking={editingBooking}
         onSubmit={handleSubmit}
